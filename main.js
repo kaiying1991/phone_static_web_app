@@ -28,7 +28,7 @@ let app = createApp({
 
 			self.numbers = [...new Map(parsed.map(item => [item['num'], item])).values()];
 		},
-		query (sortBy = 'positive', desc = true) {
+		query (sortBy = 'predict', desc = true) {
 			let self = this;
 			let data = [];
 			self.numbers.forEach(num => data.push(self.querySomJade(num.num)));
