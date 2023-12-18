@@ -9,11 +9,96 @@
 	</head>
 
 	<body>
-		<div id="app" class="p-3">
-			<div class="card">
-				<div class="card-header">Header</div>
-				<div class="card-body">body</div>
-				<div class="card-footer">footer</div>
+		<div id="app" class="container-fluid">
+			<div class="row d-flex flex-content-center">
+
+				<!-- Phone Numbers -->
+				<div class="col-md-4 col-10 p-3">
+					<div class="card">
+						<div class="card-header">Configurations</div>
+						<div class="card-body">
+
+							<div class="form-floating mb-3">
+								<textarea class="form-control" placeholder="Phone Numbers" style="height: 200px;" v-model="content"></textarea>
+								<label for="floatingTextarea">Phone Numbers</label>
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="form-floating">
+									<input type="number" class="form-control" placeholder="Prefix" v-model="prefix">
+									<label>Prefix</label>
+								</div>
+							</div>
+							<div class="input-group mb-3">
+								<div class="form-floating">
+									<input type="number" class="form-control" placeholder="Default Length" v-model="defaultLength">
+									<label>Default Length</label>
+								</div>
+							</div>
+
+							<button class="btn btn-primary me-1" @click="parseNumber()">Parse</button>
+						</div>
+					</div>
+				</div>
+				<!-- END Phone Numbers -->
+
+				<!-- Numbers -->
+				<div class="col-md-2 col-2 p-3" v-if="numbers.length">
+					<div class="card">
+						<div class="card-header">Numbers to query</div>
+						<div class="card-body">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>S/N</th>
+										<th>Numbers</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(num, i) in numbers">
+										<td>{{ i + 1 }}</td>
+										<td>{{ num.numUi }}</td>
+									</tr>
+								</tbody>
+							</table>
+							<button class="btn btn-primary" @click="query()">Query</button>
+						</div>
+					</div>
+				</div>
+				<!-- END Numbers -->
+
+				<!-- Results -->
+				<div class="col-md-6 col-12 p-3" v-if="results.length">
+					<div class="card">
+						<div class="card-header">Results</div>
+						<div class="card-body">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>S/N</th>
+										<th>Status</th>
+										<th>Number</th>
+										<th>Positive</th>
+										<th>Negative</th>
+										<th>Prediction</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(result, i) in results">
+										<td>{{ i + 1 }}</td>
+										<td>{{ result.status }}</td>
+										<td>{{ result.numUi }}</td>
+										<td>{{ result.positive }}</td>
+										<td>{{ result.negative }}</td>
+										<td>{{ result.predict }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- END Results -->
+
 			</div>
 		</div>
 

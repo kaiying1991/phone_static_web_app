@@ -2,31 +2,52 @@ const { createApp } = Vue;
 let app = createApp({
 	data () {
 		return {
+			content: '',
 			prefix: '08',
-			numbers: [
-				'88425029',
-				'88299093',
-				'88299093',
-				'90933019',
-				'92298463',
-			]
+			defaultLength: 8,
+			numbers: [],
+			results: [],
 		};
 	},
 	methods: {
-		query (sortBy='positive', desc=true) {
+		parseNumber () {
+			let self = this;
+			let parsed = [];
+			let nums = self.content.split(/[\p{P}\n\t]+/u);
+
+			nums.forEach(num => {
+				if (!isNaN(num) && num.length == self.defaultLength) {
+					let numUi = num;
+					let midIn = Math.floor(numUi.length / 2);
+					parsed.push({
+						'num': num,
+						'numUi': numUi.slice(0, midIn) + " " + numUi.slice(midIn)
+					});
+				}
+			});
+
+			self.numbers = [...new Map(parsed.map(item => [item['num'], item])).values()];
+		},
+		query (sortBy = 'positive', desc = true) {
 			let self = this;
 			let data = [];
-			self.numbers.forEach(num => data.push(self.querySomJade(self.prefix + num)));
+			self.numbers.forEach(num => data.push(self.querySomJade(num.num)));
 			if (desc) {
-				data.sort((a, b) => a[sortBy] > b[sortBy] ? -1 : a[sortBy] < b[sortBy] ? 1 : 0)
+				data.sort((a, b) => a[sortBy] > b[sortBy] ? -1 : a[sortBy] < b[sortBy] ? 1 : 0);
 			} else {
-				data.sort((a, b) => a[sortBy] < b[sortBy] ? -1 : a[sortBy] > b[sortBy] ? 1 : 0)
+				data.sort((a, b) => a[sortBy] < b[sortBy] ? -1 : a[sortBy] > b[sortBy] ? 1 : 0);
 			}
+			self.results = data;
 			return data;
 		},
 		querySomJade (phoneNumber) {
+			let self = this;
+			let numUi = phoneNumber;
+			let midIn = Math.floor(numUi.length / 2);
+
 			let data = {
-				'number': phoneNumber
+				'number': phoneNumber,
+				'numUi': numUi.slice(0, midIn) + " " + numUi.slice(midIn)
 			};
 
 			jQuery.ajax({
@@ -35,7 +56,7 @@ let app = createApp({
 				url: 'https://somjade.com/ber/',
 				contentType: 'application/x-www-form-urlencoded',
 				data: {
-					phone_number: phoneNumber,
+					phone_number: self.prefix + phoneNumber,
 					submit: 'ทำนายเบอร์โทร'
 				},
 				success: (jqXHR, textStatus) => {
@@ -52,7 +73,7 @@ let app = createApp({
 					});
 					let posPoint = vals[0];
 					let negPoint = vals[1];
-					let predPoint = parseInt(div[12].innerText.trim());
+					let predPoint = div[12].innerText.trim();
 
 					negPoint = negPoint ? negPoint : 0;
 
@@ -70,5 +91,8 @@ let app = createApp({
 
 			return data;
 		}
+	},
+	mounted () {
+
 	}
 }).mount('#app');
