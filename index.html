@@ -37,6 +37,7 @@
 							</div>
 
 							<button class="btn btn-primary me-1" @click="parseNumber()">Parse</button>
+							<button v-if="numbers.length" class="btn btn-primary" @click="query()">Query</button>
 						</div>
 					</div>
 				</div>
@@ -61,7 +62,6 @@
 									</tr>
 								</tbody>
 							</table>
-							<button class="btn btn-primary" @click="query()">Query</button>
 						</div>
 					</div>
 				</div>
