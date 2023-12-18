@@ -28,16 +28,20 @@ let app = createApp({
 
 			self.numbers = [...new Map(parsed.map(item => [item['num'], item])).values()];
 		},
-		query (sortBy = 'predict', desc = true) {
+		query (sortBy = 'positive', desc = true) {
 			let self = this;
 			let data = [];
+
 			self.numbers.forEach(num => data.push(self.querySomJade(num.num)));
+
 			if (desc) {
 				data.sort((a, b) => a[sortBy] > b[sortBy] ? -1 : a[sortBy] < b[sortBy] ? 1 : 0);
 			} else {
 				data.sort((a, b) => a[sortBy] < b[sortBy] ? -1 : a[sortBy] > b[sortBy] ? 1 : 0);
 			}
+
 			self.results = data;
+
 			return data;
 		},
 		querySomJade (phoneNumber) {

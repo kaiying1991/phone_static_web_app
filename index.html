@@ -10,55 +10,60 @@
 
 	<body>
 		<div id="app" class="container-fluid">
+			<div class="alert alert-warning mt-3" role="alert">
+				Required to install <a href="https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf" target="_blank">allow CORS extension</a>
+			  </div>
 			<div class="row d-flex flex-content-center">
 
 				<!-- Phone Numbers -->
-				<div class="col-md-4 col-10 p-3">
+				<div class="col-md-4 col-10 px-1">
 					<div class="card">
 						<div class="card-header">Configurations</div>
 						<div class="card-body">
 
-							<div class="form-floating mb-3">
-								<textarea class="form-control" placeholder="Phone Numbers" style="height: 200px;" v-model="content"></textarea>
+							<div class="form-floating mb-1">
+								<textarea class="form-control" placeholder="Phone Numbers" style="height: 500px;" v-model="content"></textarea>
 								<label for="floatingTextarea">Phone Numbers</label>
 							</div>
 
-							<div class="input-group mb-3">
+							<div class="input-group mb-1">
 								<div class="form-floating">
 									<input type="number" class="form-control" placeholder="Prefix" v-model="prefix">
 									<label>Prefix</label>
 								</div>
 							</div>
-							<div class="input-group mb-3">
+							<div class="input-group mb-1">
 								<div class="form-floating">
 									<input type="number" class="form-control" placeholder="Default Length" v-model="defaultLength">
 									<label>Default Length</label>
 								</div>
 							</div>
 
-							<button class="btn btn-primary me-1" @click="parseNumber()">Parse</button>
-							<button v-if="numbers.length" class="btn btn-primary" @click="query()">Query</button>
+							<div class="d-flex flex-row">
+								<button class="btn btn-primary me-1" @click="parseNumber()">Parse</button>
+								<button class="btn btn-primary" @click="query()">Query</button>
+							</div>
 						</div>
 					</div>
 				</div>
 				<!-- END Phone Numbers -->
 
 				<!-- Numbers -->
-				<div class="col-md-2 col-2 p-3" v-if="numbers.length">
+				<div class="col-md-2 col-2 px-1" v-if="numbers.length">
 					<div class="card">
 						<div class="card-header">Numbers to query</div>
 						<div class="card-body">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>S/N</th>
-										<th>Numbers</th>
+										<th class="py-0">S/N</th>
+										<th class="py-0">Numbers</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr v-for="(num, i) in numbers">
-										<td>{{ i + 1 }}</td>
-										<td>{{ num.numUi }}</td>
+										<td class="py-0">{{ i + 1 }}</td>
+										<td class="py-0">{{ num.numUi }}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -68,29 +73,29 @@
 				<!-- END Numbers -->
 
 				<!-- Results -->
-				<div class="col-md-6 col-12 p-3" v-if="results.length">
+				<div class="col-md-6 col-12 px-1" v-if="results.length">
 					<div class="card">
 						<div class="card-header">Results</div>
 						<div class="card-body">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>S/N</th>
-										<th>Status</th>
-										<th>Number</th>
-										<th>Positive</th>
-										<th>Negative</th>
-										<th>Prediction</th>
+										<th class="py-0">S/N</th>
+										<th class="py-0">Status</th>
+										<th class="py-0">Number</th>
+										<th class="py-0">Positive</th>
+										<th class="py-0">Negative</th>
+										<th class="py-0">Prediction</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr v-for="(result, i) in results">
-										<td>{{ i + 1 }}</td>
-										<td>{{ result.status }}</td>
-										<td>{{ result.numUi }}</td>
-										<td>{{ result.positive }}</td>
-										<td>{{ result.negative }}</td>
-										<td>{{ result.predict }}</td>
+										<td class="py-0">{{ i + 1 }}</td>
+										<td class="py-0">{{ result.status }}</td>
+										<td class="py-0">{{ result.numUi }}</td>
+										<td class="py-0">{{ result.positive }}</td>
+										<td class="py-0">{{ result.negative }}</td>
+										<td class="py-0">{{ result.predict }}</td>
 									</tr>
 								</tbody>
 							</table>
