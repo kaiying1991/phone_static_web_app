@@ -16,6 +16,7 @@ let app = createApp({
 			let nums = self.content.split(/[\p{P}\n\t]+/u);
 
 			nums.forEach(num => {
+				num = num.replace(' ', '');
 				if (!isNaN(num) && num.length == self.defaultLength) {
 					let numUi = num;
 					let midIn = Math.floor(numUi.length / 2);
