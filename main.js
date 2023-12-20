@@ -44,6 +44,11 @@ let app = createApp({
 
 			return data;
 		},
+		parseAndquery () {
+			let self = this;
+			self.parseNumber();
+			self.query();
+		},
 		querySomJade (phoneNumber) {
 			let self = this;
 			let numUi = phoneNumber;
