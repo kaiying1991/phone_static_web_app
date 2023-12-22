@@ -40,9 +40,9 @@
 							</div>
 
 							<div class="d-flex flex-row">
-								<button class="btn btn-primary me-1" @click="parseNumber()">Parse</button>
-								<button class="btn btn-primary me-1" @click="query()">Query</button>
-								<button class="btn btn-primary me-1" @click="parseAndquery()">Parse & Query</button>
+								<button class="btn btn-primary me-1" :disabled="loading" @click="parseNumber()">Parse</button>
+								<button class="btn btn-primary me-1" :disabled="loading" @click="query()">Query</button>
+								<button class="btn btn-primary me-1" :disabled="loading" @click="parseAndquery()">Parse & Query</button>
 							</div>
 						</div>
 					</div>

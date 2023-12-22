@@ -7,6 +7,7 @@ let app = createApp({
 			defaultLength: 8,
 			numbers: [],
 			results: [],
+			loading: false
 		};
 	},
 	methods: {
@@ -33,6 +34,7 @@ let app = createApp({
 			let self = this;
 			let data = [];
 
+			self.loading = true;
 			self.numbers.forEach(num => data.push(self.querySomJade(num.num)));
 
 			if (desc) {
@@ -42,7 +44,7 @@ let app = createApp({
 			}
 
 			self.results = data;
-
+			setTimeout(() => self.loading = false, 1000);
 			return data;
 		},
 		parseAndquery () {
